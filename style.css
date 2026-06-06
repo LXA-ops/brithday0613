@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-container {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 24px;
+  width: 380px;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.calendar-header button {
+  background: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.calendar-header button:hover {
+  background: #ddd;
+}
+
+.header-text {
+  text-align: center;
+}
+
+#yearDisplay {
+  display: block;
+  font-size: 14px;
+  color: #888;
+}
+
+#monthDisplay {
+  display: block;
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.calendar-weekdays span:first-child,
+.calendar-weekdays span:last-child {
+  color: #e74c3c;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar-days span {
+  text-align: center;
+  padding: 8px 0;
+  font-size: 15px;
+  border-radius: 8px;
+  cursor: default;
+}
+
+.calendar-days span.other-month {
+  color: #ccc;
+}
+
+.calendar-days span.today {
+  background: #667eea;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.calendar-days span:hover:not(.other-month) {
+  background: #f0f0ff;
+}

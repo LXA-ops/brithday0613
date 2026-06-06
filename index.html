@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>日历</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="calendar-container">
+    <div class="calendar-header">
+      <button id="prevBtn">&lt;</button>
+      <div class="header-text">
+        <span id="yearDisplay"></span>
+        <span id="monthDisplay"></span>
+      </div>
+      <button id="nextBtn">&gt;</button>
+    </div>
+    <div class="calendar-weekdays">
+      <span>日</span><span>一</span><span>二</span><span>三</span>
+      <span>四</span><span>五</span><span>六</span>
+    </div>
+    <div class="calendar-days" id="daysContainer"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
