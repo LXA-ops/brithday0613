@@ -4,13 +4,21 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg-start: #667eea;
+  --bg-end: #764ba2;
+  --today-bg: #667eea;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background 0.4s;
+  position: relative;
 }
 
 .calendar-container {
@@ -94,7 +102,7 @@ body {
 }
 
 .calendar-days span.today {
-  background: #667eea;
+  background: var(--today-bg);
   color: #fff;
   font-weight: 600;
   border-radius: 8px;
@@ -102,4 +110,64 @@ body {
 
 .calendar-days span:hover:not(.other-month) {
   background: #f0f0ff;
+}
+
+/* ── Theme button ── */
+#themeBtn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(6px);
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.2s, background 0.2s;
+  line-height: 1;
+}
+
+#themeBtn:hover {
+  transform: scale(1.1);
+  background: rgba(255,255,255,0.4);
+}
+
+/* ── Color palette popup ── */
+.theme-palette {
+  position: fixed;
+  top: 72px;
+  right: 20px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(8px);
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  display: none;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  z-index: 10;
+}
+
+.theme-palette.show {
+  display: grid;
+}
+
+.theme-palette div {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.theme-palette div:hover {
+  transform: scale(1.15);
+}
+
+.theme-palette div.active {
+  border-color: #333;
 }
