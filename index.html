@@ -7,9 +7,21 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <button id="themeBtn" title="切换主题">🎨</button>
-  <div class="theme-palette" id="themePalette"></div>
-  <div class="calendar-container">
+  <button id="themeBtn" title="切换模式">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/>
+      <line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="1" y1="12" x2="3" y2="12"/>
+      <line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+  </button>
+
+  <div class="calendar-container" id="calendarContainer">
     <div class="calendar-header">
       <button id="prevBtn">&lt;</button>
       <div class="header-text">
@@ -18,12 +30,32 @@
       </div>
       <button id="nextBtn">&gt;</button>
     </div>
-    <div class="calendar-weekdays">
-      <span>日</span><span>一</span><span>二</span><span>三</span>
-      <span>四</span><span>五</span><span>六</span>
+
+    <button id="todayBtn" style="display:none;">回到今天</button>
+
+    <div class="view-switcher">
+      <button class="view-btn active" data-view="month">月</button>
+      <button class="view-btn" data-view="week">周</button>
+      <button class="view-btn" data-view="year">年</button>
     </div>
+
     <div class="calendar-days" id="daysContainer"></div>
   </div>
+
+  <div class="modal-overlay" id="notesModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span id="notesDateLabel"></span>
+        <button id="closeModal" class="modal-close">&times;</button>
+      </div>
+      <textarea id="notesInput" rows="5" placeholder="记录当天事项..."></textarea>
+      <div class="modal-actions">
+        <button id="saveNotes" class="btn-primary">保存</button>
+        <button id="deleteNotes" class="btn-danger" style="display:none;">删除</button>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
