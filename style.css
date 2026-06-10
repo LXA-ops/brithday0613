@@ -964,9 +964,11 @@ body {
   }
   .calendar-container,
   .calendar-container.year-active {
-    width: fit-content;
-    min-width: 100%;
+    width: calc(100vw - 12px);
+    max-width: none;
     padding: 16px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .year-grid {
     grid-template-columns: repeat(2, 1fr);
