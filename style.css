@@ -182,7 +182,6 @@ body {
   padding: 28px 28px 32px;
   width: 620px;
   max-width: 100%;
-  overflow: hidden;
   transition: background 0.3s, box-shadow 0.3s, width 0.3s;
   margin: 0 auto;
 }
