@@ -166,6 +166,7 @@ body {
 .page.active { display: flex; flex-direction: column; }
 .page-scroll {
   flex: 1; overflow-y: auto;
+  min-width: 0;
   padding: 0 16px 16px;
   -webkit-overflow-scrolling: touch;
 }
@@ -181,6 +182,7 @@ body {
   padding: 28px 28px 32px;
   width: 620px;
   max-width: 100%;
+  overflow: hidden;
   transition: background 0.3s, box-shadow 0.3s, width 0.3s;
   margin: 0 auto;
 }
@@ -306,6 +308,7 @@ body {
   justify-content: flex-start;
   color: var(--card-text);
   transition: background 0.15s;
+  overflow: hidden;
 }
 
 .calendar-days span:not(.other-month) {
@@ -439,6 +442,7 @@ body {
   min-height: unset;
   display: block;
   position: relative;
+  overflow: hidden;
 }
 
 .year-month .ym-days span.today {
