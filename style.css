@@ -958,10 +958,14 @@ body {
 @media (max-width: 660px) {
   .page { padding: 64px 0 64px; }
   .page-scroll { padding: 0 12px 12px; }
+  #page-calendar .page-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
   .calendar-container,
   .calendar-container.year-active {
-    width: 100%;
-    max-width: 100%;
+    width: fit-content;
+    min-width: 100%;
     padding: 16px;
   }
   .year-grid {
