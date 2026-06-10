@@ -139,7 +139,10 @@ body {
   display: flex; align-items: center; justify-content: space-around;
   z-index: 50;
   padding-bottom: env(safe-area-inset-bottom, 0);
-  transition: background 0.3s;
+  transition: transform 0.3s, background 0.3s;
+}
+.main-nav.hidden {
+  transform: translateY(100%);
 }
 .nav-btn {
   background: none; border: none;
@@ -177,6 +180,7 @@ body {
   box-shadow: var(--card-shadow);
   padding: 28px 28px 32px;
   width: 620px;
+  max-width: 100%;
   transition: background 0.3s, box-shadow 0.3s, width 0.3s;
   margin: 0 auto;
 }
@@ -955,7 +959,8 @@ body {
   .page-scroll { padding: 0 12px 12px; }
   .calendar-container,
   .calendar-container.year-active {
-    width: 95vw;
+    width: 100%;
+    max-width: 100%;
     padding: 16px;
   }
   .year-grid {

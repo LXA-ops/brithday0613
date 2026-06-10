@@ -102,25 +102,27 @@
 
   <!-- ===== CALENDAR PAGE ===== -->
   <section id="page-calendar" class="page">
-    <div class="calendar-container" id="calendarContainer">
-      <div class="calendar-header">
-        <button id="prevBtn">&lt;</button>
-        <div class="header-text">
-          <span id="yearDisplay"></span>
-          <span id="monthDisplay"></span>
+    <div class="page-scroll">
+      <div class="calendar-container" id="calendarContainer">
+        <div class="calendar-header">
+          <button id="prevBtn">&lt;</button>
+          <div class="header-text">
+            <span id="yearDisplay"></span>
+            <span id="monthDisplay"></span>
+          </div>
+          <button id="nextBtn">&gt;</button>
         </div>
-        <button id="nextBtn">&gt;</button>
+
+        <button id="todayBtn">回到今天</button>
+
+        <div class="view-switcher">
+          <button class="view-btn active" data-view="month">月</button>
+          <button class="view-btn" data-view="week">周</button>
+          <button class="view-btn" data-view="year">年</button>
+        </div>
+
+        <div class="calendar-days" id="daysContainer"></div>
       </div>
-
-      <button id="todayBtn">回到今天</button>
-
-      <div class="view-switcher">
-        <button class="view-btn active" data-view="month">月</button>
-        <button class="view-btn" data-view="week">周</button>
-        <button class="view-btn" data-view="year">年</button>
-      </div>
-
-      <div class="calendar-days" id="daysContainer"></div>
     </div>
   </section>
 

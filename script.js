@@ -230,6 +230,9 @@ function switchPage(page) {
   document.querySelectorAll('.nav-btn').forEach(el => {
     el.classList.toggle('active', el.dataset.page === page);
   });
+  // Reset nav on page switch
+  document.getElementById('mainNav').classList.remove('hidden');
+  navLastScroll = 0;
   if (page === 'home') renderHome();
   else if (page === 'calendar') render();
   else if (page === 'about') renderAbout();
@@ -705,6 +708,21 @@ document.addEventListener('keydown', (e) => {
 
 document.getElementById('scheduleNote')?.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && e.ctrlKey) saveScheduleFromModal();
+});
+
+/* ── Scroll: nav auto-hide ── */
+let navLastScroll = 0;
+document.querySelectorAll('.page-scroll').forEach(el => {
+  el.addEventListener('scroll', () => {
+    const nav = document.getElementById('mainNav');
+    const st = el.scrollTop;
+    if (st > navLastScroll && st > 10) {
+      nav.classList.add('hidden');
+    } else {
+      nav.classList.remove('hidden');
+    }
+    navLastScroll = Math.max(0, st);
+  });
 });
 
 /* ── Init ── */
