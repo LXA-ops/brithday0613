@@ -121,14 +121,13 @@ body {
   position: fixed; top: 20px; right: 20px;
   width: 44px; height: 44px;
   border: none; border-radius: 50%;
-  background: var(--theme-btn-bg);
-  backdrop-filter: blur(6px);
+  background: transparent;
   cursor: pointer; z-index: 100;
   display: flex; align-items: center; justify-content: center;
   color: var(--theme-btn-color);
   transition: transform 0.2s, background 0.2s;
 }
-#themeBtn:hover { transform: scale(1.1); background: var(--theme-btn-hover-bg); }
+#themeBtn:hover { transform: scale(1.1); background: rgba(255,255,255,0.3); }
 
 /* ── Bottom Navigation ── */
 .main-nav {
@@ -160,7 +159,7 @@ body {
 .page {
   display: none;
   height: 100vh;
-  padding: 0 0 72px;
+  padding: 72px 0 72px;
   overflow: hidden;
 }
 .page.active { display: flex; flex-direction: column; }
@@ -969,7 +968,7 @@ body {
 }
 
 @media (max-width: 660px) {
-  .page { padding: 0 0 64px; }
+  .page { padding: 64px 0 64px; }
   .page-scroll { padding: 0 12px 12px; }
   #page-calendar .page-scroll {
     overflow-x: auto;
