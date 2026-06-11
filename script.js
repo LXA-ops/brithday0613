@@ -230,6 +230,12 @@ function switchPage(page) {
   document.querySelectorAll('.nav-btn').forEach(el => {
     el.classList.toggle('active', el.dataset.page === page);
   });
+  // Theme button: show on home only for mobile
+  if (isMobile()) {
+    document.getElementById('themeBtn').style.display = page === 'home' ? '' : 'none';
+  } else {
+    document.getElementById('themeBtn').style.display = '';
+  }
   // Reset nav on page switch
   if (!isMobile()) {
     document.getElementById('mainNav').classList.remove('hidden');
