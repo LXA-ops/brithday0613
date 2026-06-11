@@ -289,6 +289,7 @@ function renderHome() {
         <div class="schedule-info">
           <div class="s-title">${s.weekday} ${s.day}日${timeStr} ${escHtml(s.title)}</div>
         </div>
+        <button class="schedule-done" data-action="done" title="标记完成">✓</button>
       </div>`;
     }).join('');
   } else {
@@ -683,6 +684,18 @@ document.getElementById('fabBtn')?.addEventListener('click', () => {
 
 // Schedule card click (delegated)
 document.addEventListener('click', (e) => {
+  // Handle completion
+  const doneBtn = e.target.closest('[data-action="done"]');
+  if (doneBtn) {
+    const item = doneBtn.closest('.schedule-item');
+    const dateStr = item.dataset.date;
+    const id = item.dataset.id;
+    deleteScheduleForDate(dateStr, id);
+    renderHome();
+    render();
+    return;
+  }
+  // Open schedule modal
   const item = e.target.closest('.schedule-item');
   if (item) {
     const dateStr = item.dataset.date;

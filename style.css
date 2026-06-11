@@ -639,6 +639,21 @@ body {
   color: var(--card-subtext);
   margin-top: 2px;
 }
+.schedule-done {
+  background: none; border: none;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--card-subtext);
+  font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s, color 0.2s;
+}
+.schedule-done:hover {
+  background: var(--hover-bg);
+  color: var(--today-bg);
+}
 
 .suggestion-body { padding: 0 4px; position: relative; }
 .suggestion-body::before {
