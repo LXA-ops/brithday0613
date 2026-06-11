@@ -352,6 +352,9 @@ function navigate(delta) {
 function goToToday() {
   currentDate = new Date();
   currentView = 'month';
+  document.querySelectorAll('.view-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.view === currentView);
+  });
   render();
 }
 
