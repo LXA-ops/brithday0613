@@ -160,7 +160,7 @@ body {
 .page {
   display: none;
   height: 100vh;
-  padding: 72px 0 72px;
+  padding: 0 0 72px;
   overflow: hidden;
 }
 .page.active { display: flex; flex-direction: column; }
@@ -969,7 +969,7 @@ body {
 }
 
 @media (max-width: 660px) {
-  .page { padding: 64px 0 64px; }
+  .page { padding: 0 0 64px; }
   .page-scroll { padding: 0 12px 12px; }
   #page-calendar .page-scroll {
     overflow-x: auto;
