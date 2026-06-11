@@ -257,7 +257,7 @@ function renderHome() {
 
   // Collect this week's schedules
   const weekStart = new Date(today);
-  weekStart.setDate(weekStart.getDate() - weekStart.getDay());
+  weekStart.setDate(weekStart.getDate() - ((weekStart.getDay() + 6) % 7));
   const weekEnd = new Date(weekStart);
   weekEnd.setDate(weekEnd.getDate() + 6);
   const allScheds = getAllSchedules();
@@ -304,8 +304,10 @@ function renderHomeSuggestion() {
 function renderWeekPreview() {
   const container = document.getElementById('weekPreview');
   const start = new Date(today);
-  start.setDate(start.getDate() - start.getDay());
+  // Monday as first day of week
+  start.setDate(start.getDate() - ((start.getDay() + 6) % 7));
   const allScheds = getAllSchedules();
+  const wdLabels = ['一','二','三','四','五','六','日'];
   let html = '';
   for (let i = 0; i < 7; i++) {
     const d = new Date(start);
@@ -314,7 +316,7 @@ function renderWeekPreview() {
     const isToday = d.toDateString() === today.toDateString();
     const hasSched = !!(allScheds[ds] && allScheds[ds].length);
     html += `<button class="week-preview-item${isToday ? ' today' : ''}" data-date="${ds}">
-      <span class="wp-weekday">${['日','一','二','三','四','五','六'][d.getDay()]}</span>
+      <span class="wp-weekday">${wdLabels[i]}</span>
       <span class="wp-day">${d.getDate()}</span>
       ${hasSched ? '<span class="wp-dot"></span>' : ''}
     </button>`;
@@ -375,7 +377,7 @@ function updateTodayBtn() {
     btn.style.display = diff === 0 ? 'none' : 'block';
   } else if (currentView === 'week') {
     const weekStart = new Date(currentDate);
-    weekStart.setDate(weekStart.getDate() - weekStart.getDay());
+    weekStart.setDate(weekStart.getDate() - ((weekStart.getDay() + 6) % 7));
     const todayStart = new Date(today);
     todayStart.setDate(todayStart.getDate() - todayStart.getDay());
     btn.style.display = +weekStart === +todayStart ? 'none' : 'block';
@@ -415,7 +417,7 @@ function updateHeader() {
 
 /* ── Render month grid (original + schedule dots) ── */
 function getMonthGrid(year, month) {
-  const firstDay = new Date(year, month, 1).getDay();
+  const firstDay = (new Date(year, month, 1).getDay() + 6) % 7;
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const prevDays = new Date(year, month, 0).getDate();
   const notes = getNotes();
@@ -453,11 +455,10 @@ function getMonthGrid(year, month) {
 function renderMonth(year, month) {
   const container = document.getElementById('daysContainer');
   const cells = getMonthGrid(year, month);
-  const wds = ['日', '一', '二', '三', '四', '五', '六'];
-  let html = '';
+  const wds = ['一', '二', '三', '四', '五', '六', '日'];  let html = '';
 
   wds.forEach((wd, i) => {
-    const cls = (i === 0 || i === 6) ? 'wd-header weekend' : 'wd-header';
+    const cls = (i === 5 || i === 6) ? 'wd-header weekend' : 'wd-header';
     html += `<div class="${cls}">${wd}</div>`;
   });
 
@@ -488,14 +489,15 @@ function renderMonth(year, month) {
 function renderWeek(date) {
   const container = document.getElementById('daysContainer');
   const start = new Date(date);
-  start.setDate(start.getDate() - start.getDay());
+  // Monday as first day of week
+  start.setDate(start.getDate() - ((start.getDay() + 6) % 7));
   const notes = getNotes();
   const allScheds = getAllSchedules();
-  const wds = ['日', '一', '二', '三', '四', '五', '六'];
+  const wds = ['一', '二', '三', '四', '五', '六', '日'];
 
   let html = '';
   wds.forEach((wd, i) => {
-    const cls = (i === 0 || i === 6) ? 'wd-header weekend' : 'wd-header';
+    const cls = (i === 5 || i === 6) ? 'wd-header weekend' : 'wd-header';
     html += `<div class="${cls}">${wd}</div>`;
   });
 
@@ -535,7 +537,7 @@ function renderYear(year) {
 
   let html = '<div class="year-grid">';
   for (let m = 0; m < 12; m++) {
-    const firstDay = new Date(year, m, 1).getDay();
+    const firstDay = (new Date(year, m, 1).getDay() + 6) % 7;
     const daysInMonth = new Date(year, m + 1, 0).getDate();
     const prevDays = new Date(year, m, 0).getDate();
     const grid = [];
@@ -555,7 +557,7 @@ function renderYear(year) {
 
     html += `<div class="year-month" data-year="${year}" data-month="${m}">`;
     html += `<div class="ym-title">${MONTHS[m]}</div>`;
-    html += `<div class="ym-weekdays"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>`;
+    html += `<div class="ym-weekdays"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>`;
     html += `<div class="ym-days">`;
     for (const cell of grid) {
       let cls = cell.other ? 'other-month' : '';
