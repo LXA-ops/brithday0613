@@ -316,6 +316,10 @@ body {
 .calendar-days span.other-month {
   color: var(--other-month-text);
 }
+.calendar-days span.other-month .day-lunar,
+.calendar-days span.other-month .day-holiday {
+  color: inherit;
+}
 
 .calendar-days span.today {
   background: var(--today-bg);
@@ -418,8 +422,8 @@ body {
   height: 36px;
 }
 
-.year-month .ym-weekdays span:first-child,
-.year-month .ym-weekdays span:last-child {
+.year-month .ym-weekdays span:nth-child(6),
+.year-month .ym-weekdays span:nth-child(7) {
   color: var(--weekend-color);
 }
 
@@ -449,6 +453,14 @@ body {
 }
 
 .year-month .ym-days span.other-month {
+  color: var(--other-month-text);
+}
+.year-month .ym-days span:nth-child(6),
+.year-month .ym-days span:nth-child(7) {
+  color: var(--weekend-color);
+}
+.year-month .ym-days span.other-month:nth-child(6),
+.year-month .ym-days span.other-month:nth-child(7) {
   color: var(--other-month-text);
 }
 
