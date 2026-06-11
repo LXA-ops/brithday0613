@@ -1006,4 +1006,5 @@ body {
   .hero-date-day { font-size: 24px; }
   .home-card { padding: 14px; }
   .modal-content { width: 95vw; padding: 16px; }
+  #themeBtn { display: none; }
 }
