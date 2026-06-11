@@ -314,11 +314,12 @@ body {
 }
 
 .calendar-days span.other-month {
-  color: var(--other-month-text);
+  color: var(--other-month-text) !important;
 }
+.calendar-days span.other-month .day-num,
 .calendar-days span.other-month .day-lunar,
 .calendar-days span.other-month .day-holiday {
-  color: inherit;
+  color: inherit !important;
 }
 
 .calendar-days span.today {
