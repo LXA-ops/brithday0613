@@ -159,7 +159,7 @@ body {
 .page {
   display: none;
   height: 100vh;
-  padding: 0 0 72px;
+  padding: 0;
   overflow: hidden;
 }
 .page.active { display: flex; flex-direction: column; }
@@ -182,7 +182,7 @@ body {
   width: 620px;
   max-width: 100%;
   transition: background 0.3s, box-shadow 0.3s, width 0.3s;
-  margin: 20px auto 0;
+  margin: 72px auto 0;
 }
 
 .calendar-header {
@@ -491,7 +491,7 @@ body {
   background: linear-gradient(135deg, #e8d5f5, #d5e8f5, #f5d5e8);
   border-radius: 16px;
   padding: 28px 20px 24px;
-  margin-top: 20px;
+  margin-top: 72px;
   margin-bottom: 16px;
   text-align: center;
 }
@@ -744,7 +744,7 @@ body {
   box-shadow: var(--card-shadow);
   transition: background 0.3s, box-shadow 0.3s;
 }
-.about-card:first-child { margin-top: 20px; }
+.about-card:first-child { margin-top: 72px; }
 .logo-card {
   text-align: center;
   padding: 36px 20px;
@@ -970,7 +970,7 @@ body {
 }
 
 @media (max-width: 660px) {
-  .page { padding: 0 0 64px; }
+  .page { padding: 0; }
   .page-scroll { padding: 0 12px 12px; }
   #page-calendar .page-scroll {
     overflow-x: auto;
