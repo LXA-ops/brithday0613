@@ -159,14 +159,14 @@ body {
 .page {
   display: none;
   height: 100vh;
-  padding: 0 0 72px;
+  padding: 0;
   overflow: hidden;
 }
 .page.active { display: flex; flex-direction: column; }
 .page-scroll {
   flex: 1; overflow-y: auto;
   min-width: 0;
-  padding: 0 16px 16px;
+  padding: 0 16px;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -968,8 +968,8 @@ body {
 }
 
 @media (max-width: 660px) {
-  .page { padding: 0 0 64px; }
-  .page-scroll { padding: 0 12px 12px; }
+  .page { padding: 0; }
+  .page-scroll { padding: 0 12px; }
   .home-hero { margin-top: 20px; }
   .calendar-container { margin-top: 20px; }
   .about-card:first-child { margin-top: 20px; }
