@@ -537,9 +537,11 @@ function renderMonth(year, month) {
     html += `</span>`;
   }
 
+  // renderMonth
   container.innerHTML = html;
   container.style.display = 'grid';
-  document.getElementById('calendarContainer').classList.remove('year-active');
+  const cc = document.getElementById('calendarContainer');
+  cc.classList.remove('year-active', 'week-active');
   triggerAnimation(container);
   container.querySelectorAll('span:not(.other-month):not(.wd-header)').forEach(el => {
     el.addEventListener('click', () => openScheduleModal(el.dataset.date, null));
@@ -580,9 +582,12 @@ function renderWeek(date) {
     html += `</span>`;
   }
 
+  // renderWeek
   container.innerHTML = html;
   container.style.display = 'grid';
-  document.getElementById('calendarContainer').classList.remove('year-active');
+  const cc = document.getElementById('calendarContainer');
+  cc.classList.remove('year-active');
+  cc.classList.add('week-active');
   triggerAnimation(container);
   container.querySelectorAll('span:not(.wd-header)').forEach(el => {
     el.addEventListener('click', () => openScheduleModal(el.dataset.date, null));
@@ -629,7 +634,9 @@ function renderYear(year) {
 
   container.innerHTML = html;
   container.style.display = 'block';
-  document.getElementById('calendarContainer').classList.add('year-active');
+  const cc = document.getElementById('calendarContainer');
+  cc.classList.remove('week-active');
+  cc.classList.add('year-active');
   triggerAnimation(container.querySelector('.year-grid'));
 
   container.querySelectorAll('.year-month').forEach(el => {
