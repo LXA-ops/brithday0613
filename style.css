@@ -396,6 +396,7 @@ body {
   padding: 4px 6px;
   cursor: pointer;
   transition: background 0.2s;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .year-month:hover {
@@ -1083,6 +1084,9 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 4px;
     max-width: 160px;
+  }
+  .year-month {
+    -webkit-tap-highlight-color: transparent;
   }
   .calendar-days {
     overflow-x: auto;
