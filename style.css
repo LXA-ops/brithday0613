@@ -1082,7 +1082,7 @@ body {
   .year-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 4px;
-    max-width: 50%;
+    max-width: 160px;
   }
   .calendar-days {
     overflow-x: auto;
