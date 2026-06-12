@@ -821,6 +821,7 @@ document.querySelectorAll('.page-scroll').forEach(el => {
           nav.classList.add('hidden');
         }
       }
+    } else {
       // Desktop: auto-hide on scroll down, show on scroll up
       if (st > navLastScroll && st > 10) {
         nav.classList.add('hidden');
@@ -831,7 +832,6 @@ document.querySelectorAll('.page-scroll').forEach(el => {
     }
   });
 });
-
 /* ── Init ── */
 if (localStorage.getItem('darkMode') === '1') {
   document.documentElement.setAttribute('data-theme', 'dark');

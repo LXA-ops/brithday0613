@@ -1097,13 +1097,14 @@ body {
   }
   .calendar-container.week-active .calendar-days span {
     height: 80px;
-    padding-top: 4px;
+    padding-top: 2px;
+    padding-bottom: 4px;
     justify-content: flex-start;
   }
   .calendar-container.week-active .calendar-days span .day-lunar {
     height: 11px;
     line-height: 11px;
-    margin-bottom: 1px;
+    margin-bottom: 0;
   }
   .calendar-container.week-active .calendar-days span .day-holiday {
     height: 13px;
