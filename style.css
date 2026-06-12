@@ -388,6 +388,8 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
+  max-width: 520px;
+  margin: 0 auto;
 }
 
 .year-month {
@@ -1061,6 +1063,7 @@ body {
   .year-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 6px;
+    max-width: 440px;
   }
 }
 
@@ -1082,12 +1085,13 @@ body {
   .year-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 4px;
+    max-width: 360px;
   }
-  .year-month { padding: 2px 3px; }
-  .year-month .ym-title { font-size: 9px; margin-bottom: 0; }
-  .year-month .ym-weekdays { font-size: 6px; line-height: 16px; height: 16px; margin-bottom: 0; }
-  .year-month .ym-days span { font-size: 8px; line-height: 16px; height: 16px; }
-  .year-month .ym-days span .note-star { font-size: 4px; top: 0; left: 0; }
+  .year-month { padding: 2px 2px; }
+  .year-month .ym-title { font-size: 8px; margin-bottom: 0; }
+  .year-month .ym-weekdays { font-size: 5px; line-height: 14px; height: 14px; margin-bottom: 0; }
+  .year-month .ym-days span { font-size: 7px; line-height: 14px; height: 14px; }
+  .year-month .ym-days span .note-star { font-size: 4px; top: -1px; left: 0; }
   .calendar-days {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
