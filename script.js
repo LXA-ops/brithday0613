@@ -368,7 +368,7 @@ function renderWeekPreview() {
 function renderBirthdayLink() {
   const m = today.getMonth(), d = today.getDate();
   // June 13
-  if (m === 5 && d === 13) {
+  if (m === 5 && d === 12) {
     const container = document.getElementById('todayScheduleList').parentElement;
     const old = container.querySelector('.birthday-link');
     if (old) old.remove();
