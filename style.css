@@ -1254,11 +1254,17 @@ body {
 .bday-cake-container {
   margin: 30px auto;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+  outline: none;
 }
 .bday-cake {
   position: relative;
   width: 280px; height: 280px;
   margin: 0 auto;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
 .bday-plate {
   width: 300px; height: 25px;
