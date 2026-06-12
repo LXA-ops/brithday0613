@@ -1097,18 +1097,20 @@ body {
   }
   .calendar-container.week-active .calendar-days span {
     height: 80px;
-    padding-top: 2px;
-    padding-bottom: 4px;
+    padding: 0 2px 2px;
     justify-content: flex-start;
   }
+  .calendar-container.week-active .calendar-days span .day-num {
+    line-height: 1.1;
+  }
   .calendar-container.week-active .calendar-days span .day-lunar {
-    height: 11px;
-    line-height: 11px;
+    height: 9px;
+    line-height: 9px;
     margin-bottom: 0;
   }
   .calendar-container.week-active .calendar-days span .day-holiday {
-    height: 13px;
-    line-height: 13px;
+    height: 11px;
+    line-height: 11px;
   }
   .day-num { font-size: 11px; }
   .day-lunar { font-size: 5px; }
