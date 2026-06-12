@@ -820,6 +820,10 @@ body {
   font-size: 14px;
   line-height: 1.8;
   color: var(--card-text);
+  margin-bottom: 12px;
+}
+.about-card p:last-child {
+  margin-bottom: 0;
 }
 .about-features {
   list-style: none;
