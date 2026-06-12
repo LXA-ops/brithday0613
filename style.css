@@ -1097,6 +1097,7 @@ body {
   }
   .calendar-container.week-active .calendar-days span {
     height: 80px;
+    padding-top: 2px;
   }
   .day-num { font-size: 11px; }
   .day-lunar { font-size: 5px; }
