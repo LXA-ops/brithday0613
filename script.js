@@ -781,9 +781,9 @@ document.getElementById('scheduleNote')?.addEventListener('keydown', (e) => {
 let navLastScroll = 0;
 function isMobile() { return window.innerWidth <= 660; }
 
-// On mobile, nav starts hidden
+// On mobile, nav starts visible
 if (isMobile()) {
-  document.getElementById('mainNav').classList.add('hidden');
+  document.getElementById('mainNav').classList.remove('hidden');
 }
 
 document.querySelectorAll('.page-scroll').forEach(el => {
@@ -792,12 +792,13 @@ document.querySelectorAll('.page-scroll').forEach(el => {
     const st = el.scrollTop;
 
     if (isMobile()) {
-      // Mobile: show only when pulled to top
-      if (st <= 5) {
-        nav.classList.remove('hidden');
-      } else {
+      // Mobile: hide on scroll down, show on scroll up (same as desktop)
+      if (st > navLastScroll && st > 10) {
         nav.classList.add('hidden');
+      } else {
+        nav.classList.remove('hidden');
       }
+      navLastScroll = Math.max(0, st);
     } else {
       // Desktop: auto-hide on scroll down, show on scroll up
       if (st > navLastScroll && st > 10) {
