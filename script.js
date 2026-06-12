@@ -258,10 +258,16 @@ function switchPage(page) {
   } else {
     document.getElementById('themeBtn').style.display = page === 'birthday' ? 'none' : '';
   }
-  // Hide nav on birthday page
+  // Hide nav on birthday page, show/hide on mobile by page
   if (page === 'birthday') {
     document.getElementById('mainNav').classList.add('hidden');
-  } else if (!isMobile()) {
+  } else if (isMobile()) {
+    if (page === 'home') {
+      document.getElementById('mainNav').classList.remove('hidden');
+    } else {
+      document.getElementById('mainNav').classList.add('hidden');
+    }
+  } else {
     document.getElementById('mainNav').classList.remove('hidden');
   }
   navLastScroll = 0;
@@ -792,14 +798,22 @@ document.querySelectorAll('.page-scroll').forEach(el => {
     const st = el.scrollTop;
 
     if (isMobile()) {
-      // Mobile: hide on scroll down, show on scroll up (same as desktop)
-      if (st > navLastScroll && st > 10) {
-        nav.classList.add('hidden');
+      if (currentPage === 'home') {
+        // Home: hide on scroll down, show on scroll up
+        if (st > navLastScroll && st > 10) {
+          nav.classList.add('hidden');
+        } else {
+          nav.classList.remove('hidden');
+        }
+        navLastScroll = Math.max(0, st);
       } else {
-        nav.classList.remove('hidden');
+        // Other pages: only show when pulled to top
+        if (st <= 5) {
+          nav.classList.remove('hidden');
+        } else {
+          nav.classList.add('hidden');
+        }
       }
-      navLastScroll = Math.max(0, st);
-    } else {
       // Desktop: auto-hide on scroll down, show on scroll up
       if (st > navLastScroll && st > 10) {
         nav.classList.add('hidden');
