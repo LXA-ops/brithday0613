@@ -245,6 +245,7 @@ function escHtml(s) { const d = document.createElement('div'); d.textContent = s
 /* ═══════════════ PAGE NAVIGATION ═══════════════ */
 function switchPage(page) {
   if (page === currentPage) return;
+  const prevPage = currentPage;
   currentPage = page;
   document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
@@ -255,16 +256,19 @@ function switchPage(page) {
   if (isMobile()) {
     document.getElementById('themeBtn').style.display = page === 'home' ? '' : 'none';
   } else {
-    document.getElementById('themeBtn').style.display = '';
+    document.getElementById('themeBtn').style.display = page === 'birthday' ? 'none' : '';
   }
-  // Reset nav on page switch
-  if (!isMobile()) {
+  // Hide nav on birthday page
+  if (page === 'birthday') {
+    document.getElementById('mainNav').classList.add('hidden');
+  } else if (!isMobile()) {
     document.getElementById('mainNav').classList.remove('hidden');
   }
   navLastScroll = 0;
   if (page === 'home') renderHome();
   else if (page === 'calendar') render();
   else if (page === 'about') renderAbout();
+  else if (page === 'birthday' && prevPage !== 'birthday') initBirthday();
 }
 
 /* ═══════════════ HOME PAGE ═══════════════ */
@@ -320,6 +324,7 @@ function renderHome() {
 
   renderHomeSuggestion();
   renderWeekPreview();
+  renderBirthdayLink();
   document.querySelector('#page-home .page-scroll').scrollTop = 0;
 }
 
@@ -358,6 +363,21 @@ function renderWeekPreview() {
       switchPage('calendar');
     });
   });
+}
+
+function renderBirthdayLink() {
+  const m = today.getMonth(), d = today.getDate();
+  // June 13
+  if (m === 5 && d === 13) {
+    const container = document.getElementById('todayScheduleList').parentElement;
+    const old = container.querySelector('.birthday-link');
+    if (old) old.remove();
+    const link = document.createElement('button');
+    link.className = 'birthday-link';
+    link.innerHTML = '🎂 今天是你的生日！点击查看惊喜 →';
+    link.addEventListener('click', () => switchPage('birthday'));
+    container.appendChild(link);
+  }
 }
 
 function renderScheduleItem(s, dateStr) {
@@ -800,3 +820,234 @@ render();
 
 // Clock refresh every 30s
 setInterval(updateTime, 30000);
+
+/* ── About More Toggle ── */
+document.getElementById('aboutMoreBtn').addEventListener('click', function() {
+  const content = document.getElementById('aboutMoreContent');
+  const isOpen = content.classList.toggle('open');
+  this.textContent = isOpen ? '收起' : '更多';
+});
+
+// ============================================================
+//  BIRTHDAY PAGE
+// ============================================================
+let bdayParticles = [];
+let bdayFrame = 0;
+let bdayBalloonInterval = null;
+let bdayCandlesBlown = false;
+let bdayInitialized = false;
+
+function initBirthday() {
+  if (bdayInitialized) {
+    // Reset steps
+    document.querySelectorAll('.bday-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('bstep1').classList.add('active');
+    document.getElementById('bdayWish').classList.remove('show');
+    document.getElementById('bdayBackBtn').style.display = 'block';
+    document.getElementById('bdayCandle').classList.remove('out');
+    document.getElementById('bdayHint').textContent = '点击蛋糕吹蜡烛 🕯️';
+    document.getElementById('bdayHint').style.opacity = '';
+    bdayCandlesBlown = false;
+    return;
+  }
+  bdayInitialized = true;
+
+  const canvas = document.getElementById('bdayCanvas');
+  const ctx = canvas.getContext('2d');
+  let W, H;
+  function resize() { W = canvas.width = canvas.clientWidth; H = canvas.height = canvas.clientHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Particles
+  class BdayParticle {
+    constructor(x, y, color) {
+      this.x = x; this.y = y;
+      this.color = color;
+      const a = Math.random() * Math.PI * 2;
+      const s = Math.random() * 5 + 2;
+      this.vx = Math.cos(a) * s;
+      this.vy = Math.sin(a) * s;
+      this.life = 1;
+      this.decay = Math.random() * 0.018 + 0.008;
+      this.size = Math.random() * 3 + 1.5;
+    }
+    update() {
+      this.x += this.vx; this.y += this.vy;
+      this.vy += 0.04; this.vx *= 0.99;
+      this.life -= this.decay;
+    }
+    draw() {
+      ctx.globalAlpha = Math.max(0, this.life);
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size * Math.max(0.1, this.life), 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  const PALETTES = [
+    ['#e94560','#f0e68c','#fff'],
+    ['#74b9ff','#55efc4','#fff'],
+    ['#fd79a8','#f0e68c','#c084fc'],
+    ['#ff9a8b','#fbbf24','#f472b6'],
+    ['#34d399','#60a5fa','#a78bfa'],
+  ];
+
+  function burst(cx, cy, count, colors) {
+    for (let i = 0; i < count; i++) {
+      bdayParticles.push(new BdayParticle(cx, cy, colors[Math.floor(Math.random() * colors.length)]));
+    }
+  }
+
+  function autoBurst() {
+    const p = PALETTES[Math.floor(Math.random() * PALETTES.length)];
+    const x = Math.random() * W * 0.6 + W * 0.2;
+    const y = Math.random() * H * 0.5 + H * 0.05;
+    burst(x, y, 60, p);
+    setTimeout(() => burst(x, y, 30, p), 120);
+  }
+
+  function celebrateBursts() {
+    const centers = [
+      [W/2, H/3, 90, ['#e94560','#f0e68c','#74b9ff','#fd79a8','#fff']],
+      [W*0.25, H*0.35, 60, ['#f472b6','#f0e68c','#fff']],
+      [W*0.75, H*0.35, 60, ['#74b9ff','#55efc4','#fff']],
+      [W*0.4, H*0.2, 50, ['#ff9a8b','#fbbf24','#c084fc']],
+      [W*0.6, H*0.2, 50, ['#34d399','#60a5fa','#a78bfa']],
+    ];
+    centers.forEach(([x, y, c, pal], i) => {
+      setTimeout(() => burst(x, y, c, pal), i * 150);
+    });
+  }
+
+  function animLoop() {
+    if (!document.getElementById('page-birthday').classList.contains('active')) {
+      requestAnimationFrame(animLoop);
+      return;
+    }
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = 'rgba(15,12,41,0.25)';
+    ctx.fillRect(0, 0, W, H);
+
+    bdayFrame++;
+    if (bdayFrame % 12 === 0 && Math.random() < 0.35) autoBurst();
+    if (bdayFrame % 40 === 0 && Math.random() < 0.3) autoBurst();
+
+    for (let i = bdayParticles.length - 1; i >= 0; i--) {
+      const p = bdayParticles[i];
+      p.update(); p.draw();
+      if (p.life <= 0) bdayParticles.splice(i, 1);
+    }
+    requestAnimationFrame(animLoop);
+  }
+  animLoop();
+
+  // Click fireworks on birthday page only
+  document.getElementById('page-birthday').addEventListener('click', (e) => {
+    if (!document.getElementById('page-birthday').classList.contains('active')) return;
+    const rect = document.getElementById('page-birthday').getBoundingClientRect();
+    const cx = e.clientX - rect.left, cy = e.clientY - rect.top;
+    const colors = ['#e94560','#f0e68c','#74b9ff','#55efc4','#fd79a8','#fbbf24','#34d399'];
+    for (let i = 0; i < 3; i++) {
+      setTimeout(() => burst(cx + (Math.random()-0.5)*50, cy + (Math.random()-0.5)*50, 30, colors), i * 100);
+    }
+  });
+
+  // Balloons
+  const BALLOON_CHARS = ['🎈','🎈','🎈','⭐','💫','🎉','🎊','💖'];
+  function spawnBalloon() {
+    const area = document.getElementById('bdayBalloonArea');
+    const el = document.createElement('div');
+    el.className = 'bday-balloon';
+    el.textContent = BALLOON_CHARS[Math.floor(Math.random() * BALLOON_CHARS.length)];
+    el.style.left = Math.random() * 92 + '%';
+    el.style.fontSize = (Math.random() * 16 + 28) + 'px';
+    const dur = Math.random() * 6 + 10;
+    el.style.animationDuration = dur + 's';
+    area.appendChild(el);
+    setTimeout(() => el.remove(), dur * 1000 + 200);
+  }
+
+  function startBalloons() {
+    if (bdayBalloonInterval) return;
+    for (let i = 0; i < 3; i++) setTimeout(spawnBalloon, i * 200);
+    bdayBalloonInterval = setInterval(spawnBalloon, 600);
+    setTimeout(() => {
+      if (bdayBalloonInterval) {
+        clearInterval(bdayBalloonInterval);
+        bdayBalloonInterval = setInterval(spawnBalloon, 2000);
+      }
+    }, 30000);
+  }
+
+  // Confetti
+  function spawnConfetti(count) {
+    const colors = ['#e94560','#f0e68c','#74b9ff','#55efc4','#fd79a8','#34d399','#fbbf24','#c084fc'];
+    for (let i = 0; i < count; i++) {
+      const el = document.createElement('div');
+      el.className = 'bday-confetti';
+      el.style.left = Math.random() * 100 + '%';
+      el.style.top = '-10px';
+      el.style.background = colors[Math.floor(Math.random() * colors.length)];
+      const s = Math.random() * 6 + 4;
+      el.style.width = s + 'px';
+      el.style.height = s + 'px';
+      el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      el.style.animationDuration = (Math.random() * 2 + 3) + 's';
+      el.style.animationDelay = (Math.random() * 2) + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 6000);
+    }
+  }
+
+  // Typewriter
+  function startTypewriter() {
+    const el = document.getElementById('bdayTypewriter');
+    const text = 'Happy Birthday';
+    el.textContent = '';
+    let i = 0;
+    const tw = setInterval(() => {
+      if (i < text.length) { el.textContent += text[i]; i++; }
+      else { clearInterval(tw); el.classList.add('done'); }
+    }, 100);
+  }
+
+  // Step 1 → Step 2
+  document.getElementById('bdayStartBtn').addEventListener('click', () => {
+    document.querySelectorAll('.bday-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('bstep2').classList.add('active');
+    startBalloons();
+    startTypewriter();
+    for (let i = 0; i < 4; i++) setTimeout(autoBurst, i * 300);
+    for (let i = 0; i < 8; i++) setTimeout(spawnBalloon, i * 120);
+    setTimeout(() => {
+      for (let i = 0; i < 5; i++) setTimeout(spawnBalloon, i * 150);
+    }, 1500);
+  });
+
+  // Blow candles
+  document.getElementById('bdayCake').addEventListener('click', () => {
+    if (bdayCandlesBlown) return;
+    bdayCandlesBlown = true;
+    document.getElementById('bdayCandle').classList.add('out');
+    document.getElementById('bdayHint').textContent = '🎉 许个愿吧！';
+    document.getElementById('bdayHint').style.opacity = '0.5';
+    setTimeout(() => {
+      celebrateBursts();
+      spawnConfetti(80);
+      setTimeout(() => spawnConfetti(60), 600);
+      setTimeout(() => spawnConfetti(40), 1200);
+      for (let i = 0; i < 6; i++) setTimeout(spawnBalloon, i * 150);
+    }, 700);
+    setTimeout(() => {
+      document.getElementById('bdayWish').classList.add('show');
+    }, 1400);
+  });
+
+  // Back to home
+  document.getElementById('bdayBackBtn').addEventListener('click', () => {
+    switchPage('home');
+  });
+}

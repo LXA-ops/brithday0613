@@ -136,9 +136,15 @@
 
       <div class="about-card">
         <h3>关于本站</h3>
-        <p>这是我专门为你制作的网站，目前有显示日历和添加日程的功能，希望你能用的上（-v-）</p>
+        <p>这是我专门为你制作的网站，目前有显示日历和添加日程的功能，希望你能用的上（- v -）</p>
         <p>不过我也是第一次尝试，应该还有一些没发现的bug，遇到了就跟我说一声，我会及时改的~</p>
-        <p>你还有什么想要的功能也可以跟我说，我试着做</p>
+        <p>你还有什么想要的功能或者玩法也可以跟我说，我会试着做</p>
+        <div class="about-more-wrap">
+          <div class="about-more-content" id="aboutMoreContent">
+            <p>（这个网站是一个静态的纯前端页面，没有连接数据库，如果你用手机访问的话所有数据都只会存在你的手机中，其他访问这个网站的人包括我都看不到，不用担心隐私问题）</p>
+          </div>
+          <button class="about-more-btn" id="aboutMoreBtn">更多</button>
+        </div>
       </div>
 
       <div class="about-card">
@@ -155,6 +161,63 @@
         <h3>版本</h3>
         <p>v1.0 · 2026年6月</p>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== BIRTHDAY PAGE ===== -->
+  <section id="page-birthday" class="page page-birthday">
+    <canvas id="bdayCanvas"></canvas>
+    <div id="bdayBalloonArea"></div>
+
+    <!-- Welcome step -->
+    <div class="bday-step active" id="bstep1">
+      <div class="bday-card">
+        <div class="bday-deco">🎂</div>
+        <h1 class="bday-title">有一份惊喜等着你</h1>
+        <p class="bday-sub">
+          准备好了吗？<br>惊喜就在眼前 🎉
+        </p>
+        <button class="bday-btn" id="bdayStartBtn">开启惊喜</button>
+      </div>
+    </div>
+
+    <!-- Celebration step -->
+    <div class="bday-step" id="bstep2">
+      <div class="bday-cele-wrap">
+        <div class="bday-cele-card">
+          <p class="bday-greeting">✨ 祝你 ✨</p>
+          <p class="bday-name">生日快乐</p>
+          <p class="bday-typewriter" id="bdayTypewriter"></p>
+
+          <div class="bday-cake-container" id="bdayCake">
+            <div class="bday-cake">
+              <div class="bday-plate"></div>
+              <div class="bday-layer bday-layer-bottom"></div>
+              <div class="bday-layer bday-layer-middle"></div>
+              <div class="bday-layer bday-layer-top"></div>
+              <div class="bday-icing">
+                <div class="bday-drip bday-drip1"></div>
+                <div class="bday-drip bday-drip2"></div>
+                <div class="bday-drip bday-drip3"></div>
+              </div>
+              <div class="bday-candle" id="bdayCandle">
+                <div class="bday-flame"></div>
+                <div class="bday-glow"></div>
+              </div>
+            </div>
+            <p class="bday-hint" id="bdayHint">点击蛋糕吹蜡烛 🕯️</p>
+          </div>
+
+          <p class="bday-wishline">愿你的每一天都闪闪发光 ✨</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wish overlay -->
+    <div class="bday-wish-overlay" id="bdayWish">
+      <div class="bday-wish-text">🎉 生日快乐！🎉</div>
+      <div class="bday-wish-sub">愿你的每一天都充满欢笑与温暖 🌟</div>
+      <button class="bday-back-btn" id="bdayBackBtn">返回首页</button>
     </div>
   </section>
 
