@@ -388,8 +388,6 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
-  max-width: 520px;
-  margin: 0 auto;
 }
 
 .year-month {
@@ -1061,8 +1059,8 @@ body {
     width: 95vw;
   }
   .year-grid {
+    grid-template-columns: repeat(2, 1fr);
     gap: 6px;
-    max-width: 460px;
   }
 }
 
@@ -1082,9 +1080,9 @@ body {
     margin-right: auto;
   }
   .year-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 4px;
-    max-width: 340px;
+    max-width: 320px;
   }
   .calendar-days {
     overflow-x: auto;
