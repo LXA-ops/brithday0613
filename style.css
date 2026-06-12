@@ -1080,8 +1080,13 @@ body {
   }
   .year-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    gap: 6px;
   }
+  .year-month { padding: 2px 4px; }
+  .year-month .ym-title { font-size: 10px; margin-bottom: 0; }
+  .year-month .ym-weekdays { font-size: 7px; line-height: 20px; height: 20px; }
+  .year-month .ym-days span { font-size: 9px; line-height: 18px; height: 18px; }
+  .year-month .ym-days span .note-star { font-size: 5px; }
   .calendar-days {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
